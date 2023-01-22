@@ -13,7 +13,7 @@ class Place(models.Model):
 
 class Image(models.Model):
     title = models.CharField(verbose_name='Имя картинки', max_length=200)
-    file = models.ImageField(verbose_name='Картика', upload_to='media/')
+    file = models.ImageField(verbose_name='Картика')
 
     def __str__(self) -> str:
         return self.title
