@@ -19,9 +19,10 @@ def index(request):
             "properties": {
                 "title": place.title,
                 "placeId": place.place_id,
-                "detailsUrl": "https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/moscow_legends.json"
+                "detailsUrl": request.build_absolute_uri(f'place/{place.place_id}')
             }
         }
+        print(place_data)
         output_data['features'].append(place_data)
     return render(request, 'index.html', {'geo_points' : output_data})
 
