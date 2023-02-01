@@ -14,7 +14,7 @@ class Place(models.Model):
 
 class Image(models.Model):
     title = models.CharField(verbose_name='Имя картинки', max_length=200)
-    place = models.ManyToManyField(Place, verbose_name='Место', related_name='images', blank=True)
+    place = models.ForeignKey(Place, verbose_name='Место', related_name='images', on_delete=models.CASCADE, blank=True, default=0)
     file = models.ImageField(verbose_name='Картика')
 
     def __str__(self) -> str:

@@ -29,7 +29,7 @@ def index(request):
 def about_place(request, place_id):
     place = get_object_or_404(Place, place_id=place_id)
     imgs = []
-    for image in Image.objects.filter(place_id=place_id).iterator():
+    for image in Image.objects.filter(place=place).iterator():
         imgs.append(request.build_absolute_uri(image.file.url))
     response_data = {
         "title": place.title,
