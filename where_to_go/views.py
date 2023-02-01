@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, HttpResponse
 from places.models import Place, Image
+from django.http.response import JsonResponse
+
 
 
 def index(request):
@@ -12,7 +14,7 @@ def index(request):
             "type": "Feature",
             "geometry": {
                 "type": "Point",
-                "coordinates": [place.lat, place.lon],
+                "coordinates": [place.lon, place.lat],
             },
             "properties": {
                 "title": place.title,
@@ -23,35 +25,19 @@ def index(request):
         output_data['features'].append(place_data)
     return render(request, 'index.html', {'geo_points' : output_data})
 
-
-
-
-#     {
-#       "type": "FeatureCollection",
-#       "features": [
-#         {
-#           "type": "Feature",
-#           "geometry": {
-#             "type": "Point",
-#             "coordinates": [37.62, 55.793676]
-#           },
-#           "properties": {
-#             "title": "«Легенды Москвы",
-#             "placeId": "moscow_legends",
-#             "detailsUrl": "https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/moscow_legends.json"
-#           }
-#         },
-#         {
-#           "type": "Feature",
-#           "geometry": {
-#             "type": "Point",
-#             "coordinates": [37.64, 55.753676]
-#           },
-#           "properties": {
-#             "title": "Крыши24.рф",
-#             "placeId": "roofs24",
-#             "detailsUrl": "https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/roofs24.json"
-#           }
-#         }
-#       ]
-#     }
+def about_place(request, place_id):
+    place = get_object_or_404(Place, place_id=place_id)
+    imgs = []
+    for image in Image.objects.filter(place_id=place_id).iterator():
+        imgs.append(request.build_absolute_uri(image.file.url))
+    response_data = {
+        "title": place.title,
+        "imgs": imgs,
+        "description_short": place.description_short,
+        "description_long": place.description_long,
+        "coordinates": {
+            "lng": place.lon,
+            "lat": place.lat
+        }
+    }
+    return JsonResponse(response_data, safe=False, json_dumps_params={'ensure_ascii': False})

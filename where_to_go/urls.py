@@ -7,6 +7,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
+    path('place/<str:place_id>/', views.about_place),
 ]
 
 if settings.DEBUG:

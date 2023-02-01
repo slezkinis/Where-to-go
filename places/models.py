@@ -14,6 +14,7 @@ class Place(models.Model):
 
 class Image(models.Model):
     title = models.CharField(verbose_name='Имя картинки', max_length=200)
+    place_id = models.CharField(verbose_name='ID места', max_length=200, blank=True)
     file = models.ImageField(verbose_name='Картика')
 
     def __str__(self) -> str:
