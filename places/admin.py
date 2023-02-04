@@ -1,12 +1,16 @@
 from django.contrib import admin
 from .models import Place, Image
 from django.utils.safestring import mark_safe
+from adminsortable2.admin import SortableAdminMixin, SortableStackedInline
+from adminsortable2.admin import SortableAdminBase
 
 
-class ImageInline(admin.TabularInline):
+class ImageInline(SortableStackedInline):
     model = Image
     readonly_fields = ['get_preview']
     fields = ['title', 'file', 'get_preview']
+    extra = 0
+
     def get_preview(self, obj):
         return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(
             url = obj.file.url,
@@ -15,8 +19,9 @@ class ImageInline(admin.TabularInline):
             )
     )
 
+
 @admin.register(Place)
-class PlaceAdmin(admin.ModelAdmin):
+class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     inlines = [
         ImageInline
     ]
