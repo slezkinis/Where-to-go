@@ -22,7 +22,6 @@ def index(request):
                 "detailsUrl": request.build_absolute_uri(f'place/{place.place_id}')
             }
         }
-        print(place_data)
         output_data['features'].append(place_data)
     return render(request, 'index.html', {'geo_points' : output_data})
 
