@@ -22,6 +22,7 @@ class Command(BaseCommand):
             lat=about_place['coordinates']['lat'],
             lon=about_place['coordinates']['lng']
         )
+        place.place_id = about_place['title']
         place.description_short = about_place['description_short']
         place.description_long = about_place['description_long']
         place.save()
