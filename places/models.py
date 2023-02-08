@@ -20,7 +20,7 @@ class Image(models.Model):
     file = models.ImageField(verbose_name='Картика')
     order = models.PositiveIntegerField(
         default=0,
-        blank=False,
+        blank=True,
         null=False,
     )
 
