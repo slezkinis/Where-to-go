@@ -27,4 +27,4 @@ class Image(models.Model):
         ordering = ['order']    
 
     def __str__(self) -> str:
-        return self.title
+        return self.file
