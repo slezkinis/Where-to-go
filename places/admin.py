@@ -7,7 +7,7 @@ from adminsortable2.admin import SortableAdminBase, SortableStackedInline
 class ImageInline(SortableStackedInline):
     model = Image
     readonly_fields = ['get_preview']
-    fields = ['title', 'file', 'get_preview']
+    fields = ['file', 'get_preview']
     extra = 0
 
     def get_preview(self, obj):

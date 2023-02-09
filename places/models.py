@@ -15,7 +15,6 @@ class Place(models.Model):
 
 
 class Image(models.Model):
-    title = models.CharField(verbose_name='Имя картинки', max_length=200)
     place = models.ForeignKey(Place, verbose_name='Место', related_name='images', on_delete=models.CASCADE, blank=True, default=0)
     file = models.ImageField(verbose_name='Картика')
     order = models.PositiveIntegerField(

@@ -30,7 +30,6 @@ class Command(BaseCommand):
         place.save()
         for img_url in about_place['imgs']:
             img = Image.objects.create(
-                title=about_place['title'],
                 place=place            
             )
             response = requests.get(img_url)
