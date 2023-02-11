@@ -15,10 +15,9 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", ['127.0.0.1', '.pythonanywhere.com'])
 
 SECRET_KEY = env.str(
     "SECRET_KEY",
-    "django-insecure-aw)h8*4g=945om3uq5o+86vby@w2y_w(6cp!2d-)m6c1-4vgln"
 )
 
-DEBUG = env.bool("DEBUG", True)
+DEBUG = env.bool("DEBUG", False)
 
 
 # Application definition
