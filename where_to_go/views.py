@@ -9,7 +9,7 @@ def index(request):
       "type": "FeatureCollection",
       "features": []
     }
-    for place in Place.objects.all().iterator():
+    for place in Place.objects.all():
         place_data = {
             "type": "Feature",
             "geometry": {
@@ -28,7 +28,7 @@ def index(request):
 def about_place(request, place_id):
     place = get_object_or_404(Place, place_id=place_id)
     imgs = []
-    for image in Image.objects.filter(place=place).iterator():
+    for image in Image.objects.filter(place=place):
         imgs.append(request.build_absolute_uri(image.file.url))
     response_data = {
         "title": place.title,
