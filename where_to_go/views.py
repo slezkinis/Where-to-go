@@ -18,15 +18,15 @@ def index(request):
             },
             "properties": {
                 "title": place.title,
-                "placeId": place.place_id,
-                "detailsUrl": request.build_absolute_uri(f'place/{place.place_id}')
+                "placeId": place.id,
+                "detailsUrl": request.build_absolute_uri(f'place/{place.id}')
             }
         }
         output_data['features'].append(place_data)
     return render(request, 'index.html', {'geo_points' : output_data})
 
 def about_place(request, place_id):
-    place = get_object_or_404(Place, place_id=place_id)
+    place = get_object_or_404(Place, id=place_id)
     imgs = []
     for image in Image.objects.filter(place=place):
         imgs.append(request.build_absolute_uri(image.file.url))
