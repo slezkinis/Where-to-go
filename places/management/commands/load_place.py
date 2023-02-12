@@ -23,8 +23,8 @@ class Command(BaseCommand):
             lon=about_place['coordinates']['lng']
         )
         place.place_id = about_place['title']
-        place.description_short = about_place['description_short']
-        place.description_long = about_place['description_long']
+        place.short_description = about_place['description_short']
+        place.long_description = about_place['description_long']
         for image in Image.objects.filter(place=place):
             image.delete()
         place.save()
