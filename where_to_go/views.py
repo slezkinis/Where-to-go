@@ -25,8 +25,8 @@ def index(request):
         output_data['features'].append(place_data)
     return render(request, 'index.html', {'geo_points' : output_data})
 
-def about_place(request, place_id):
-    place = get_object_or_404(Place, id=place_id)
+def about_place(request, id):
+    place = get_object_or_404(Place, id=id)
     imgs = []
     for image in Image.objects.filter(place=place):
         imgs.append(image.file.url)
