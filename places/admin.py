@@ -11,10 +11,8 @@ class ImageInline(SortableStackedInline):
     extra = 0
 
     def get_preview(self, obj):
-        return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(
+        return mark_safe('<img src="{url}" height=300 />'.format(
             url = obj.file.url,
-            width=obj.file.width / 3,
-            height=obj.file.height / 3,
             )
     )
 
