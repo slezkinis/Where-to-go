@@ -25,5 +25,6 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
         ImageInline
     ]
 
-
-admin.site.register(Image)
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    pass
