@@ -14,7 +14,7 @@ class Place(models.Model):
 
 
 class Image(models.Model):
-    place = models.ForeignKey(Place, verbose_name='Место', related_name='images', on_delete=models.CASCADE, blank=True, default=0)
+    place = models.ForeignKey(Place, verbose_name='Место', related_name='images', on_delete=models.CASCADE)
     file = models.ImageField(verbose_name='Картика')
     order = models.PositiveIntegerField(
         default=0,
