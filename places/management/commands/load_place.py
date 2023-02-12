@@ -17,14 +17,13 @@ class Command(BaseCommand):
         response = requests.get(url)
         response.raise_for_status()
         about_place = response.json()
-        place, created = Place.objects.get_or_create(
+        place, created = Place.objects.update_or_create(
             title=about_place['title'],
             lat=about_place['coordinates']['lat'],
-            lon=about_place['coordinates']['lng']
+            lon=about_place['coordinates']['lng'],
+            short_description=about_place['description_short'],
+            long_description=about_place['description_long']
         )
-        place.place_id = about_place['title']
-        place.short_description = about_place['description_short']
-        place.long_description = about_place['description_long']
         for image in Image.objects.filter(place=place):
             image.delete()
         place.save()
