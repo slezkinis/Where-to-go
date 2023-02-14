@@ -6,8 +6,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
-    path('place/<int:id>/', views.about_place),
+    path('', include('places.urls')),
+    path('place/<int:id>/', include('places.urls')),
     path('tinymce/', include('tinymce.urls')),
 ]
 
