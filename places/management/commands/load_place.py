@@ -28,13 +28,11 @@ class Command(BaseCommand):
             image.delete()
         place.save()
         for img_url in about_place['imgs']:
-            img = Image.objects.create(
-                place=place            
-            )
             response = requests.get(img_url)
             response.raise_for_status()
             content = ContentFile(response.content)
-            with open(join(BASE_DIR, f'media/{about_place["title"]}.jpg'), 'wb') as file:
-                file.write(response.content)
-            img.file.save(f'{about_place["title"]}.jpg', content, True)
+            img = Image.objects.create(
+                place=place, 
+            )
+            img.file.save(name='img', content=content, save=True)
         
