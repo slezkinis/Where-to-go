@@ -19,10 +19,12 @@ class Command(BaseCommand):
         about_place = response.json()
         place, created = Place.objects.update_or_create(
             title=about_place['title'],
-            lat=about_place['coordinates']['lat'],
-            lon=about_place['coordinates']['lng'],
-            short_description=about_place['description_short'],
-            long_description=about_place['description_long']
+            defaults={
+                'lat': about_place['coordinates']['lat'],
+                'lon': about_place['coordinates']['lng'],
+                'short_description': about_place['description_short'],
+                'long_description': about_place['description_long']
+            }
         )
         for image in place.images.all():
             image.delete()
