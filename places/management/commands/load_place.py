@@ -10,10 +10,10 @@ class Command(BaseCommand):
     help = 'Add place and images to db from json.'
 
     def add_arguments(self, parser):
-        parser.add_argument('json_url', nargs='+', type=str)
+        parser.add_argument('json_url', type=str)
 
     def handle(self, *args, **options):
-        url = options['json_url'][0]
+        url = options['json_url']
         response = requests.get(url)
         response.raise_for_status()
         about_place = response.json()
