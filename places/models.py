@@ -25,3 +25,5 @@ class Image(models.Model):
     class Meta:
         ordering = ['order']    
 
+    def __str__(self) -> str:
+        return self.place.title
