@@ -7,7 +7,7 @@ from os.path import join
 
 
 class Command(BaseCommand):
-    help = 'Closes the specified poll for voting'
+    help = 'Add place and images to db from json.'
 
     def add_arguments(self, parser):
         parser.add_argument('json_url', nargs='+', type=str)
