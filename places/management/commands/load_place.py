@@ -28,12 +28,13 @@ class Command(BaseCommand):
         )
         for image in place.images.all():
             image.delete()
-        for img_url in about_place['imgs']:
+        for img_order, img_url in enumerate(about_place['imgs']):
             response = requests.get(img_url)
             response.raise_for_status()
             content = ContentFile(response.content)
             img = Image.objects.create(
-                place=place, 
+                place=place,
+                order=img_order
             )
             img.file.save(name='img', content=content, save=True)
         
