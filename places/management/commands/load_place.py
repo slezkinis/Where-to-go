@@ -26,7 +26,6 @@ class Command(BaseCommand):
         )
         for image in place.images.all():
             image.delete()
-        place.save()
         for img_url in about_place['imgs']:
             response = requests.get(img_url)
             response.raise_for_status()
