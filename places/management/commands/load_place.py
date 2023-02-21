@@ -24,7 +24,7 @@ class Command(BaseCommand):
             short_description=about_place['description_short'],
             long_description=about_place['description_long']
         )
-        for image in Image.objects.filter(place=place):
+        for image in place.images.all():
             image.delete()
         place.save()
         for img_url in about_place['imgs']:
